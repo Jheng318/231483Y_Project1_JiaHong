@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'color_extensions.dart';
+import 'pages/login.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,24 +11,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.purple[900],
-        body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const Text('hello flutter project'),
-                Image.asset(
-                  'images/mad-icons_discover icon.png',
-                  width: 100,
-                  height: 100,
-                ),
-              ]),
-        ),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(backgroundColor: ColorExtensions.gray, body: LoginPage()),
     );
   }
 }

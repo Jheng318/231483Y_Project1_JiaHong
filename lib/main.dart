@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'color_extensions.dart';
+import 'package:jiahong_mad_project/pages/signUp.dart';
 import 'pages/login.dart';
+import 'pages/signUp.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,9 +12,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(backgroundColor: ColorExtensions.gray, body: LoginPage()),
+      home: SignupPage(),
     );
   }
 }

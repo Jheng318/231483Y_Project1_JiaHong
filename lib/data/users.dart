@@ -1,20 +1,38 @@
 class User {
   final String email;
+  final String fullName;
   final String password;
-
-  const User({required this.email, required this.password});
-  @override
-  String toString() {
-    return 'User(email: $email, password: $password)';
+  String get getEmail {
+    return email;
   }
+
+  String get getPassword {
+    return password;
+  }
+
+  const User(
+      {required this.email, required this.fullName, required this.password});
+}
+
+class UserData {
+  final String email;
+  final String pwd;
+  UserData(this.email, this.pwd);
 }
 
 List<User> listOfUsers() {
   return [
-    const User(email: 'user1@example.com', password: 'password123'),
-    const User(email: 'user2@example.com', password: 'secret'),
-    const User(email: 'admin@example.com', password: 'admin'),
-    const User(email: 'john.doe@example.com', password: 'pass'),
-    const User(email: 'jane.smith@example.com', password: '12345'),
+    const User(
+        email: 'john.doe@example.com',
+        fullName: 'John Doe',
+        password: 'password123'),
+    const User(
+        email: 'jane.smith@example.com',
+        fullName: 'Jane Smith',
+        password: 'secret'),
+    const User(
+        email: 'david.lee@example.com',
+        fullName: 'David Lee',
+        password: 'pass456'),
   ];
 }

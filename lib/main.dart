@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:jiahong_mad_project/pages/signUp.dart';
+import 'package:jiahong_mad_project/pages/signup.dart';
 import 'pages/login.dart';
-import 'pages/signUp.dart';
+import 'pages/signup.dart';
+import 'package:jiahong_mad_project/data/users.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,7 +15,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignupPage(),
+      home: LoginPage(
+        users: [],
+      ),
     );
   }
 }

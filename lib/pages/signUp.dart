@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jiahong_mad_project/color_extensions.dart';
 import 'package:jiahong_mad_project/data/users.dart';
 import 'package:jiahong_mad_project/pages/login.dart';
-import 'home.dart';
 
 class UserSignup {
   final String email;
@@ -177,7 +176,7 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const LoginPage()));
+                                builder: (context) => LoginPage(users: users)));
                       }
                     },
                     style: ElevatedButton.styleFrom(

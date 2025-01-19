@@ -25,7 +25,7 @@ List<User> listOfUsers() {
     const User(
         email: 'john.doe@example.com',
         fullName: 'John Doe',
-        password: 'password123'),
+        password: 'Password123@'),
     const User(
         email: 'jane.smith@example.com',
         fullName: 'Jane Smith',

@@ -6,17 +6,18 @@ import 'pages/aboutus.dart';
 import 'package:jiahong_mad_project/data/users.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+  final users = listOfUsers();
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AboutUsPage(),
+      home: LoginPage(users: users),
     );
   }
 }

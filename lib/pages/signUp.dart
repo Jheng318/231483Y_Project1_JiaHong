@@ -186,22 +186,31 @@ class _SignupPageState extends State<SignupPage> {
                     child: const Text('Sign Up'),
                   ),
                   const Padding(padding: EdgeInsets.only(top: 20)),
-                  const Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Have an account? ",
                         style: TextStyle(
                             color: ColorExtensions.black,
                             fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                            color: ColorExtensions.purple,
-                            fontWeight: FontWeight.bold),
-                      )
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage(
+                                          users: users,
+                                        )));
+                          },
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                                color: ColorExtensions.purple,
+                                fontWeight: FontWeight.bold),
+                          ))
                     ],
                   )
                 ],

@@ -59,12 +59,87 @@ class AboutUsPage extends StatelessWidget {
                 ),
               ),
               Padding(padding: EdgeInsets.all(20)),
-              Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    radius: 90,
-                    backgroundImage: AssetImage("images/superhero.jpg"),
+                    radius: 70,
+                    backgroundImage: AssetImage("images/profile_pic.jpeg"),
                   ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Jia Hong",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: ColorExtensions.purple,
+                              fontSize: 15)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 200,
+                        child: Text(
+                          "Jia Hong is a full-stack developer who works on mobile applications on the side",
+                          softWrap: true,
+                          overflow: TextOverflow.clip,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Text(
+                "Contact Infromation",
+                style: TextStyle(
+                  color: ColorExtensions.purple,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Padding(padding: EdgeInsets.all(5)),
+              SizedBox(
+                width: 150,
+                child: Divider(
+                  thickness: 2,
+                  color: ColorExtensions.black,
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Phone Number:"),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("92133981")
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Email Address:"),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("Fit&Me@gmail.com")
+                    ],
+                  )
                 ],
               )
             ],

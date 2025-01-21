@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jiahong_mad_project/pages/home.dart';
 import 'pages/login.dart';
 import 'pages/signup.dart';
 import 'pages/aboutus.dart';
@@ -16,7 +17,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(users: users),
+      // home: LoginPage(users: users),
+      home: HomePage(),
     );
   }
 }

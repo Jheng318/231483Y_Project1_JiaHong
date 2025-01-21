@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" width="58" height="58"/>
+  <g id="discover_icon">
+    <circle class="cls-1" cx="29.29" cy="30.45" r="14.79"/>
+    <polygon class="cls-1" points="25.52 36.79 26.93 28.34 33.97 24.11 32.56 32.56 25.52 36.79"/>
+  </g>
+</svg>

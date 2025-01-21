@@ -15,6 +15,5 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Text("hello data ${widget.data.email} and ${widget.data.pwd}"),
     );
-    ;
   }
 }

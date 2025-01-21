@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jiahong_mad_project/pages/signup.dart';
 import 'pages/login.dart';
 import 'pages/signup.dart';
 import 'pages/aboutus.dart';

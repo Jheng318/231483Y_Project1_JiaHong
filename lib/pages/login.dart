@@ -5,8 +5,8 @@ import 'home.dart';
 import 'package:jiahong_mad_project/data/users.dart';
 
 class LoginPage extends StatefulWidget {
-  final List<User> users;
-  const LoginPage({super.key, required this.users});
+  final List<User>? users;
+  const LoginPage({super.key, this.users});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -31,8 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     );
     final isPasswordValid = passwordRegex.hasMatch(password ?? '');
     if (!isPasswordValid) {
-      return 'Please enter a password with at least 8 characters with at least\n'
-          '1 lowercase and uppercase letter and 1 digit';
+      return 'Password must be at least 8 characters, with 1 uppercase, 1 lowercase letter, and 1 digit.';
     }
 
     return null;
@@ -145,7 +144,9 @@ class _LoginPageState extends State<LoginPage> {
                         _formKey.currentState!.save();
 
                         UserData data = UserData(email!, password!);
-                        for (final user in widget.users) {
+                        // to loop through the users list and check whether the details entered is in the listOfUsers list
+                        // in the users.dart
+                        for (final user in widget.users!) {
                           if (email == user.getEmail &&
                               password == user.getPassword) {
                             Navigator.push(
@@ -153,6 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         HomePage(data: data)));
+                            break;
                           }
                         }
                       }

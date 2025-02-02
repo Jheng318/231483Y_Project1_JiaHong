@@ -1,20 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58">
-  <defs>
-    <style>
-      .cls-1 {
-        stroke: #fff;
-        stroke-miterlimit: 10;
-      }
-
-      .cls-1, .cls-2 {
-        fill: none;
-      }
-    </style>
-  </defs>
-  <rect class="cls-2" width="58" height="58"/>
-  <g id="discover_icon">
-    <circle class="cls-1" cx="29.29" cy="30.45" r="14.79"/>
-    <polygon class="cls-1" points="25.52 36.79 26.93 28.34 33.97 24.11 32.56 32.56 25.52 36.79"/>
-  </g>
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 26.25C21.2132 26.25 26.25 21.2132 26.25 15C26.25 8.7868 21.2132 3.75 15 3.75C8.7868 3.75 3.75 8.7868 3.75 15C3.75 21.2132 8.7868 26.25 15 26.25Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.1338 12.1738L18.75 11.25L17.8262 15.8662C17.7296 16.3501 17.4918 16.7945 17.1431 17.1435C16.7943 17.4925 16.35 17.7305 15.8662 17.8275L11.25 18.75L12.1738 14.1338C12.2707 13.6501 12.5085 13.206 12.8572 12.8572C13.206 12.5085 13.6501 12.2707 14.1338 12.1738Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

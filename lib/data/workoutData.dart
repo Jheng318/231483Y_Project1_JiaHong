@@ -29,12 +29,12 @@ List<WorkoutsData> workoutplans() {
         "Rest",
         "Rest"
       ],
-      imageUrl: "images/beast-mode.jpg",
+      imageUrl: "images/beast-mode-banner.jpg",
     ),
     const WorkoutsData(
         workoutName: "Push, Pull, Legs",
         instructorName: "Jeff Nippard",
-        imageUrl: "images/push-pull-leg.webp",
+        imageUrl: "images/ppl-jeff.jpg",
         workouts: [
           "Push",
           "Pull",
@@ -49,7 +49,7 @@ List<WorkoutsData> workoutplans() {
     const WorkoutsData(
         workoutName: "nSuns 5/3/1",
         instructorName: "Jim Wendler",
-        imageUrl: "images/nsuns.png",
+        imageUrl: "images/nsuns-banner.jpeg",
         workouts: [
           "Squat, Bench Press",
           "Deadlift, Overhead Press",
@@ -73,7 +73,7 @@ List<WorkoutsData> workoutplans() {
           "Rest",
           "Rest",
         ],
-        imageUrl: "images/candito.webp",
+        imageUrl: "images/candito-banner.jpg",
         workoutDescription:
             "The Candito 6-Week Strength Program is a popular intermediate-level program designed for increasing overall strength, particularly in the squat, bench press, and deadlift. It's known for its periodization scheme, which combines linear progression with undulating periodization, and its emphasis on submaximal volume to drive progress without excessive fatigue."),
   ];

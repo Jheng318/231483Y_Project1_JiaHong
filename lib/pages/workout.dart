@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jiahong_mad_project/color_extensions.dart';
 import 'package:jiahong_mad_project/data/workoutData.dart';
+import 'package:flutter_rating/flutter_rating.dart';
 
 class OverviewPage extends StatefulWidget {
   final String workoutName;
@@ -11,7 +12,18 @@ class OverviewPage extends StatefulWidget {
 }
 
 class _OverviewPageState extends State<OverviewPage> {
+  double rating = 0;
   final List<WorkoutsData> workoutPlans = workoutplans();
+  final List<String> workoutDay = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,18 +59,7 @@ class _OverviewPageState extends State<OverviewPage> {
                   style: TextStyle(color: ColorExtensions.gray, fontSize: 14),
                 )),
           ],
-        ), // Or your title
-        // actions: [
-        //   TextButton(
-        //     child: const Text(
-        //       "Workouts",
-        //       style: TextStyle(color: ColorExtensions.gray),
-        //     ),
-        //     onPressed: () {
-        //       print("workouts is being pressed");
-        //     },
-        //   ),
-        // ],
+        ),
       ),
       body: Center(
         widthFactor: MediaQuery.of(context).size.width * 0.9,
@@ -130,7 +131,6 @@ class _OverviewPageState extends State<OverviewPage> {
                     borderRadius: BorderRadius.circular(10)),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.9,
-                  height: 500,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                   decoration: BoxDecoration(
@@ -166,11 +166,85 @@ class _OverviewPageState extends State<OverviewPage> {
                         height: 15,
                       ),
                       const Text(
-                        "Program Description",
+                        "Program Schedule",
                         style: TextStyle(color: ColorExtensions.purple),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        height: 120,
+                        child: ListView.builder(
+                          itemCount: workoutDay.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Expanded(
+                                    flex: 1,
+                                    child: Text(
+                                      workoutDay[index],
+                                      style: const TextStyle(fontSize: 12),
+                                    )),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    workoutPlans
+                                        .firstWhere((el) =>
+                                            el.workoutName ==
+                                            widget.workoutName)
+                                        .workouts[index],
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Center(
+                child: Text(
+                  "Rate this workout",
+                  style: TextStyle(color: ColorExtensions.purple, fontSize: 15),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              StarRating(
+                rating: rating,
+                size: 40,
+                filledIcon: Icons.star,
+                halfFilledIcon: Icons.star_half,
+                emptyIcon: Icons.star_outline,
+                color: ColorExtensions.purple,
+                borderColor: Colors.grey, // Color for empty icons
+                onRatingChanged: (rating) =>
+                    setState(() => this.rating = rating),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorExtensions.purple,
+                    foregroundColor: ColorExtensions.gray,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust the radius as needed
+                    ),
+                  ),
+                  child: const Text("Add To Favourites"),
                 ),
               )
             ],

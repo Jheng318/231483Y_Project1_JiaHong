@@ -9,3 +9,6 @@ class ProfileScreen extends StatelessWidget {
     return Text("Profile Page");
   }
 }
+// can ask user to add their height and weight and i can calculate the bmi
+// display their account name and email
+// allow users to update their height, weight, name and email

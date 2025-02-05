@@ -224,7 +224,8 @@ class _SignupPageState extends State<SignupPage> {
                         User data = User(
                             email: email!,
                             fullName: fullName!,
-                            password: password!);
+                            password: password!,
+                            favouriteCourse: []);
                         // to check if there is data that is recieved from the form an add it into the users array
                         if (data.email.isNotEmpty &&
                             data.fullName.isNotEmpty &&

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jiahong_mad_project/pages/home.dart';
+import 'package:provider/provider.dart';
 import 'pages/login.dart';
-import 'pages/signup.dart';
-import 'pages/aboutus.dart';
 import 'package:jiahong_mad_project/data/users.dart';
 
 void main() {
-  runApp(MainApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => UserModel(),
+    child: MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {

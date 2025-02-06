@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jiahong_mad_project/color_extensions.dart';
 import 'package:jiahong_mad_project/pages/signup.dart';
@@ -32,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
     );
     final isPasswordValid = passwordRegex.hasMatch(password ?? '');
     if (!isPasswordValid) {
-      return 'Password must be at least 8 characters, with 1 uppercase, 1 lowercase letter, and 1 digit.';
+      return '8 characters, 1 uppercase, 1 lowercase letter, and 1 digit.';
     }
 
     return null;
@@ -140,12 +141,14 @@ class _LoginPageState extends State<LoginPage> {
                           // save the form values int the email an password variables
                           _formKey.currentState!.save();
 
-                          UserData data = UserData(email!, password!);
+                          User data = User(email: email!, password: password!);
                           // to loop through the users list and check whether the details entered is in the listOfUsers list
                           // in the users.dart
                           for (final user in widget.users!) {
                             if (email == user.getEmail &&
                                 password == user.getPassword) {
+                              Provider.of<UserModel>(context, listen: false)
+                                  .setUserData(user);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

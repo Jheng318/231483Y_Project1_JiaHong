@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class User {
-  final String email;
-  final String fullName;
-  final String password;
-  final List<String> favouriteCourse;
-  final double? weight;
-  final double? height;
-  final double? bmi;
-  String get getEmail {
+  String? email;
+  String? fullName;
+  String? password;
+  List<String>? favouriteWorkouts;
+  double? weight;
+  double? height;
+  double? bmi;
+  String? get getEmail {
     return email;
   }
 
-  String get getPassword {
+  String? get getPassword {
     return password;
   }
 
-  const User(
-      {required this.email,
-      required this.fullName,
-      required this.password,
-      required this.favouriteCourse,
+  User(
+      {this.email,
+      this.fullName,
+      this.password,
+      this.favouriteWorkouts,
       this.weight,
       this.height,
       this.bmi});
@@ -30,36 +30,58 @@ class User {
 class UserModel extends ChangeNotifier {
   User? userData;
   User? get getUser => userData;
-  set setUserData(User? value) {
+  void setUserData(User? value) {
     userData = value;
     notifyListeners();
   }
 
-  void updateName(String name) {}
-}
+  void updateName(String name) async {
+    userData?.fullName = name;
+    notifyListeners();
+  }
 
-class UserData {
-  final String email;
-  final String pwd;
-  UserData(this.email, this.pwd);
+  void updateEmail(String email) async {
+    userData?.email = email;
+    notifyListeners();
+  }
+
+  void updateWeight(double newweight) async {
+    userData?.weight = newweight;
+    notifyListeners();
+  }
+
+  void updateHeight(double newHeight) async {
+    userData?.height = newHeight;
+    notifyListeners();
+  }
+
+  void addWorkout(String workoutname) async {
+    userData?.favouriteWorkouts?.add(workoutname);
+    notifyListeners();
+  }
+
+  void removeWorkout(String workoutname) async {
+    userData?.favouriteWorkouts?.remove(workoutname);
+    notifyListeners();
+  }
 }
 
 List<User> listOfUsers() {
   return [
-    const User(
+    User(
         email: 'john.doe@example.com',
         fullName: 'John Doe',
         password: 'Password123@',
-        favouriteCourse: []),
-    const User(
+        favouriteWorkouts: []),
+    User(
         email: 'jane.smith@example.com',
         fullName: 'Jane Smith',
         password: 'secret',
-        favouriteCourse: []),
-    const User(
+        favouriteWorkouts: []),
+    User(
         email: 'david.lee@example.com',
         fullName: 'David Lee',
         password: 'pass456',
-        favouriteCourse: []),
+        favouriteWorkouts: []),
   ];
 }

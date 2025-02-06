@@ -29,8 +29,7 @@ class _SignupPageState extends State<SignupPage> {
     );
     final isPasswordValid = passwordRegex.hasMatch(password ?? '');
     if (!isPasswordValid) {
-      return 'Please enter a password with at least 8 characters with at least\n'
-          '1 lowercase and uppercase letter and 1 digit';
+      return '8 characters, 1 uppercase, 1 lowercase letter, and 1 digit.';
     }
 
     return null;
@@ -222,14 +221,15 @@ class _SignupPageState extends State<SignupPage> {
                         _formKey.currentState!.save();
 
                         User data = User(
-                            email: email!,
-                            fullName: fullName!,
-                            password: password!,
-                            favouriteCourse: []);
+                          email: email!,
+                          fullName: fullName!,
+                          password: password!,
+                        );
+
                         // to check if there is data that is recieved from the form an add it into the users array
-                        if (data.email.isNotEmpty &&
-                            data.fullName.isNotEmpty &&
-                            data.password.isNotEmpty) {
+                        if (data.email!.isNotEmpty &&
+                            data.fullName!.isNotEmpty &&
+                            data.password!.isNotEmpty) {
                           users.add(data);
 
                           Navigator.push(

@@ -9,7 +9,7 @@ import 'profile.dart';
 import 'aboutus.dart';
 
 class HomePage extends StatefulWidget {
-  final UserData? data;
+  final User? data;
   const HomePage({super.key, this.data});
 
   @override
@@ -116,7 +116,7 @@ class HomeScreen extends StatelessWidget {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
                               workout.workoutName,

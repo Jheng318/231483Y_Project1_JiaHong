@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jiahong_mad_project/data/users.dart';
+import 'package:provider/provider.dart';
 import 'package:jiahong_mad_project/color_extensions.dart';
 import 'package:jiahong_mad_project/data/workoutData.dart';
 import 'package:flutter_rating/flutter_rating.dart';
@@ -235,7 +237,17 @@ class _OverviewPageState extends State<OverviewPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (!context
+                        .read<UserModel>()
+                        .getUser!
+                        .favouriteWorkouts!
+                        .contains(widget.workoutName)) {
+                      context.read<UserModel>().addWorkout(widget.workoutName);
+                    }
+                    print("already in the favorite list");
+                    // to add the workou ttitle to the list of workouts for that user
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorExtensions.purple,
                     foregroundColor: ColorExtensions.gray,
@@ -246,6 +258,9 @@ class _OverviewPageState extends State<OverviewPage> {
                   ),
                   child: const Text("Add To Favourites"),
                 ),
+              ),
+              const SizedBox(
+                height: 10,
               )
             ],
           ),

@@ -287,6 +287,11 @@ class WorkoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<WorkoutsData> workoutPlans = workoutplans();
+    final currentWorkout = workoutPlans.firstWhere(
+      (workout) => workout.workoutName == workoutName,
+    );
+
     return Scaffold(
       backgroundColor: ColorExtensions.gray,
       appBar: AppBar(
@@ -325,20 +330,95 @@ class WorkoutPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        widthFactor: MediaQuery.sizeOf(context).width * 0.9,
-        child: const SingleChildScrollView(
-          child: Column(
-            children: [
-              ExpansionTile(
-                title: Text('ExpansionTile 1'),
-                iconColor: ColorExtensions.purple,
-                children: <Widget>[
-                  ListTile(title: Text('This is tile number 1')),
-                ],
-              ),
-            ],
-          ),
-        ),
+        widthFactor: MediaQuery.of(context).size.width * 0.9,
+        child: SingleChildScrollView(
+            child: Column(
+          children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: currentWorkout.workouts.length,
+              itemBuilder: (context, index) {
+                return currentWorkout.workouts[index].contains("Rest")
+                    ? Container()
+                    : Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        elevation: 4,
+                        child: ExpansionTile(
+                          collapsedShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          title: Text(
+                            currentWorkout.workouts[index],
+                            style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: ColorExtensions.purple),
+                          ),
+                          iconColor: ColorExtensions.purple,
+                          collapsedIconColor: ColorExtensions.purple,
+                          childrenPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          backgroundColor:
+                              Colors.white, // Background when expanded
+                          collapsedBackgroundColor:
+                              Colors.white, // Background when collapsed
+                          children: <Widget>[
+                            const Divider(
+                              color: ColorExtensions.purple,
+                              thickness: 2.0,
+                              height: 2,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text("Exercise"),
+                                Text("Sets"),
+                                Text("Reps"),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Divider(
+                              color: ColorExtensions.purple,
+                              thickness: 2.0,
+                              height: 2,
+                            ),
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: currentWorkout
+                                      .exercises[currentWorkout.workouts[index]]
+                                      ?.length ??
+                                  0,
+                              itemBuilder: (context, exerciseIndex) {
+                                final exercise = currentWorkout.exercises[
+                                    currentWorkout
+                                        .workouts[index]]![exerciseIndex];
+                                return ListTile(
+                                    title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(exercise.exercise),
+                                    Text(exercise.sets.toString()),
+                                    Text(exercise.reps.toString())
+                                  ],
+                                ));
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+              },
+            ),
+          ],
+        )),
       ),
     );
   }

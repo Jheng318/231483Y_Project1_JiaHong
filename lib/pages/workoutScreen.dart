@@ -1,114 +1,107 @@
 import 'package:flutter/material.dart';
+import 'package:jiahong_mad_project/color_extensions.dart';
+import 'package:jiahong_mad_project/data/workoutData.dart';
 
-class WorkoutScheduleScreen extends StatefulWidget {
-  const WorkoutScheduleScreen({Key? key}) : super(key: key);
+// ... (Your other imports and classes)
 
-  @override
-  State<WorkoutScheduleScreen> createState() => _WorkoutScheduleScreenState();
-}
-
-class _WorkoutScheduleScreenState extends State<WorkoutScheduleScreen> {
-  // Sample workout data (replace with your actual data)
-  final Map<String, List<Workout>> workouts = {
-    'Day 1: Upper': [
-      Workout('bench press', 3, 12),
-      Workout('pull ups', 3, 'max'),
-      Workout('dips', 3, 'max'),
-    ],
-    'Day 2: Upper': [
-      Workout('barbell rows', 3, 10),
-      Workout('seated cable rows', 3, 12),
-    ],
-    'Day 3: Upper': [
-      Workout('overhead press', 3, 8),
-      Workout('lateral raises', 3, 12),
-    ],
-    'Day 4: Upper': [
-      Workout('incline dumbbell press', 3, 10),
-      Workout('dumbbell curls', 3, 12),
-    ],
-  };
+class WorkoutPage extends StatelessWidget {
+  final String workoutName;
+  const WorkoutPage({super.key, required this.workoutName});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            // Handle back button press
-          },
-        ),
-        title: const Text('Overview'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              // Handle "Workouts" button press
-            },
-            child: const Text(
-              'Workouts',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-        backgroundColor: const Color(0xFF6F42C1), // Purple app bar
-      ),
-      body: SingleChildScrollView(
-        // For scrollable content
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Workout Days
-              ...workouts.entries.map((entry) {
-                String day = entry.key;
-                List<Workout> workoutList = entry.value;
+    final List<WorkoutsData> workoutPlans = workoutplans();
+    final currentWorkout = workoutPlans.firstWhere(
+      (workout) => workout.workoutName == workoutName,
+    );
 
-                return ExpansionTile(
-                  title: Text(day),
-                  children: workoutList.map((workout) {
-                    return ListTile(
-                      title: Text(workout.exercise),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('${workout.sets} sets'),
-                          const SizedBox(width: 16),
-                          Text('${workout.reps} reps'),
+    return Scaffold(
+      backgroundColor: ColorExtensions.gray,
+      appBar: AppBar(
+          // ... (Your app bar code)
+          ),
+      body: Center(
+        widthFactor: MediaQuery.sizeOf(context).width * 0.9,
+        child: SingleChildScrollView(
+            child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: currentWorkout.workouts.length,
+          itemBuilder: (context, index) {
+            return currentWorkout.workouts[index] == "Rest"
+                ? Container()
+                : Card(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Theme(
+                      // Wrap with Theme to customize ExpansionTile
+                      data: Theme.of(context).copyWith(
+                          dividerColor: Colors.transparent), // Remove divider
+                      child: ExpansionTile(
+                        title: Text(
+                          currentWorkout.workouts[index],
+                          style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: ColorExtensions.purple),
+                        ),
+                        iconColor: ColorExtensions.purple,
+                        collapsedIconColor: ColorExtensions.purple,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        childrenPadding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        backgroundColor: Colors.white,
+                        collapsedBackgroundColor: Colors.white,
+                        expandedCrossAxisAlignment: CrossAxisAlignment
+                            .start, // Align children to the start
+                        children: <Widget>[
+                          Padding(
+                            // Add padding around the description
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Text(
+                              'This is a 7-day strength and size routine designed to help you achieve your fitness goals.',
+                              style: const TextStyle(fontSize: 14),
+                            ),
+                          ),
+                          // Add your exercise list here dynamically
+                          // Example:
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics:
+                                const NeverScrollableScrollPhysics(), // Important for nested ListView
+                            itemCount:
+                                3, // Replace with your dynamic exercise count
+                            itemBuilder: (context, exerciseIndex) {
+                              return ListTile(
+                                leading: const Icon(
+                                  Icons.fitness_center,
+                                  color: ColorExtensions.purple,
+                                ), // Add icon
+                                title: const Text(
+                                    "Exercise Name"), // Replace with dynamic exercise name
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const Text(
+                                        "3 sets"), // Replace with dynamic sets
+                                    const SizedBox(width: 16),
+                                    const Text(
+                                        "12 reps"), // Replace with dynamic reps
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ],
                       ),
-                    );
-                  }).toList(),
-                );
-              }).toList(),
-
-              const SizedBox(height: 20),
-
-              // Add to Favorites Button
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Handle "Add To Favorites" press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF6F42C1), // Purple button
-                  ),
-                  child: const Text('Add To Favorites'),
-                ),
-              ),
-            ],
-          ),
-        ),
+                    ),
+                  );
+          },
+        )),
       ),
     );
   }
-}
-
-class Workout {
-  final String exercise;
-  final int sets;
-  final dynamic reps; // Can be int or String ('max')
-
-  Workout(this.exercise, this.sets, this.reps);
 }

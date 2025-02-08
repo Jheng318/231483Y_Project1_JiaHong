@@ -8,8 +8,17 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.watch<UserModel>().getUser?.fullName;
-    return Text(user != null ? user.toString() : 'No user found');
+    final user = context.read<UserModel>().getUser?.favouriteWorkouts;
+    return ListView.builder(
+      itemCount: user?.length,
+      itemBuilder: (context, index) {
+        return Card(
+          child: Title(color: ColorExtensions.black, child: Text(user![index])),
+        );
+      },
+    );
+
+    //return Text(user != null ? user.toString() : 'No user found');
   }
 }
 // can ask user to add their height and weight and i can calculate the bmi

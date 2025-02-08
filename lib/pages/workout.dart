@@ -25,6 +25,12 @@ class _OverviewPageState extends State<OverviewPage> {
     "Saturday",
     "Sunday"
   ];
+  late String _workoutName;
+  @override
+  void initState() {
+    super.initState();
+    _workoutName = widget.workoutName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +48,7 @@ class _OverviewPageState extends State<OverviewPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => OverviewPage(
-                                workoutName: widget.workoutName,
+                                workoutName: _workoutName,
                               )));
                 },
                 child: const Text(
@@ -54,7 +60,9 @@ class _OverviewPageState extends State<OverviewPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const WorkoutPage()));
+                          builder: (context) => WorkoutPage(
+                                workoutName: _workoutName,
+                              )));
                 },
                 child: const Text(
                   "Workouts",
@@ -174,7 +182,7 @@ class _OverviewPageState extends State<OverviewPage> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Container(
+                      SizedBox(
                         height: 120,
                         child: ListView.builder(
                           itemCount: workoutDay.length,
@@ -244,6 +252,9 @@ class _OverviewPageState extends State<OverviewPage> {
                         .favouriteWorkouts!
                         .contains(widget.workoutName)) {
                       context.read<UserModel>().addWorkout(widget.workoutName);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Workout has been added')),
+                      );
                     }
                     print("already in the favorite list");
                     // to add the workou ttitle to the list of workouts for that user
@@ -271,13 +282,63 @@ class _OverviewPageState extends State<OverviewPage> {
 }
 
 class WorkoutPage extends StatelessWidget {
-  const WorkoutPage({super.key});
+  final String workoutName;
+  const WorkoutPage({super.key, required this.workoutName});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: ColorExtensions.black,
+      backgroundColor: ColorExtensions.gray,
+      appBar: AppBar(
+        foregroundColor: ColorExtensions.gray,
+        backgroundColor: ColorExtensions.purple,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OverviewPage(
+                                workoutName: workoutName,
+                              )));
+                },
+                child: const Text(
+                  "Overview",
+                  style: TextStyle(color: ColorExtensions.gray, fontSize: 14),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WorkoutPage(
+                                workoutName: workoutName,
+                              )));
+                },
+                child: const Text(
+                  "Workouts",
+                  style: TextStyle(color: ColorExtensions.gray, fontSize: 14),
+                )),
+          ],
+        ),
+      ),
+      body: Center(
+        widthFactor: MediaQuery.sizeOf(context).width * 0.9,
+        child: const SingleChildScrollView(
+          child: Column(
+            children: [
+              ExpansionTile(
+                title: Text('ExpansionTile 1'),
+                iconColor: ColorExtensions.purple,
+                children: <Widget>[
+                  ListTile(title: Text('This is tile number 1')),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

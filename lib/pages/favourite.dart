@@ -89,6 +89,10 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                 context
                                     .read<UserModel>()
                                     .removeWorkout(workoutName);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Workout Removed')),
+                                );
                               },
                               child: const Text("Remove")),
                         ],

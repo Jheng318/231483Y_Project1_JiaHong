@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jiahong_mad_project/color_extensions.dart';
 import 'package:jiahong_mad_project/data/users.dart';
 import 'package:jiahong_mad_project/pages/login.dart';
@@ -59,224 +60,231 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorExtensions.gray,
-      body: Center(
-        widthFactor: MediaQuery.of(context).size.width * 0.9,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 283,
-                height: 283,
-                decoration: BoxDecoration(
-                    border:
-                        Border.all(width: 2.0, color: ColorExtensions.black)),
-              ),
-              const SizedBox(height: 50),
-              const Text(
-                "Signup",
-                style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontFamily: 'Poppins',
-                    fontSize: 24),
-              ),
-              const SizedBox(height: 20),
-              Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          constraints: const BoxConstraints(
-                            maxWidth: 284,
-                          ),
-                          filled: true,
-                          fillColor: ColorExtensions.gray,
-                          hintStyle:
-                              const TextStyle(color: ColorExtensions.black),
-                          hintText: 'Email',
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: const BorderSide(color: Colors.red),
-                          ),
-                          border: OutlineInputBorder(
+      body: SafeArea(
+        child: Center(
+          widthFactor: MediaQuery.of(context).size.width * 0.9,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset("assets/svgs/signup.svg"),
+                const SizedBox(height: 30),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 54,
+                    ),
+                    Text(
+                      "Signup",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Poppins',
+                          fontSize: 24),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                            constraints: const BoxConstraints(
+                              maxWidth: 284,
+                            ),
+                            filled: true,
+                            fillColor: ColorExtensions.gray,
+                            hintStyle:
+                                const TextStyle(color: ColorExtensions.black),
+                            hintText: 'Email',
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                            errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                  color: ColorExtensions.purple)),
+                              borderSide: const BorderSide(color: Colors.red),
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple)),
+                          ),
+                          validator: validateEmail,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onSaved: (val) {
+                            setState(() {
+                              email = val;
+                            });
+                          },
                         ),
-                        validator: validateEmail,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onSaved: (val) {
-                          setState(() {
-                            email = val;
-                          });
-                        },
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          constraints: const BoxConstraints(
-                            maxWidth: 284,
-                          ),
-                          filled: true,
-                          fillColor: ColorExtensions.gray,
-                          hintStyle:
-                              const TextStyle(color: ColorExtensions.black),
-                          hintText: 'Full Name',
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: const BorderSide(color: Colors.red),
-                          ),
-                          border: OutlineInputBorder(
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            constraints: const BoxConstraints(
+                              maxWidth: 284,
+                            ),
+                            filled: true,
+                            fillColor: ColorExtensions.gray,
+                            hintStyle:
+                                const TextStyle(color: ColorExtensions.black),
+                            hintText: 'Full Name',
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                            errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                  color: ColorExtensions.purple)),
-                        ),
-                        validator: validateName,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onSaved: (val) {
-                          setState(() {
-                            fullName = val;
-                          });
-                        },
-                      ),
-                      TextFormField(
-                        obscureText: false,
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          constraints: const BoxConstraints(
-                            maxWidth: 284,
+                              borderSide: const BorderSide(color: Colors.red),
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple)),
                           ),
-                          filled: true,
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                          fillColor: ColorExtensions.gray,
-                          hintStyle:
-                              const TextStyle(color: ColorExtensions.black),
-                          hintText: 'Password',
-                          border: OutlineInputBorder(
+                          validator: validateName,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onSaved: (val) {
+                            setState(() {
+                              fullName = val;
+                            });
+                          },
+                        ),
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TextFormField(
+                          obscureText: false,
+                          controller: _passwordController,
+                          decoration: InputDecoration(
+                            constraints: const BoxConstraints(
+                              maxWidth: 284,
+                            ),
+                            filled: true,
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                            fillColor: ColorExtensions.gray,
+                            hintStyle:
+                                const TextStyle(color: ColorExtensions.black),
+                            hintText: 'Password',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple, width: 2.0)),
+                            errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                  color: ColorExtensions.purple, width: 2.0)),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: const BorderSide(color: Colors.red),
+                              borderSide: const BorderSide(color: Colors.red),
+                            ),
                           ),
+                          validator: validatePassword,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onSaved: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
                         ),
-                        validator: validatePassword,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onSaved: (val) {
-                          setState(() {
-                            password = val;
-                          });
-                        },
-                      ),
-                      TextFormField(
-                        obscureText: false,
-                        decoration: InputDecoration(
-                          constraints: const BoxConstraints(
-                            maxWidth: 284,
-                          ),
-                          filled: true,
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(5, 10, 0, 0),
-                          fillColor: ColorExtensions.gray,
-                          hintStyle:
-                              const TextStyle(color: ColorExtensions.black),
-                          hintText: 'Confirm Password',
-                          border: OutlineInputBorder(
+                        const Padding(padding: EdgeInsets.only(top: 20)),
+                        TextFormField(
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            constraints: const BoxConstraints(
+                              maxWidth: 284,
+                            ),
+                            filled: true,
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(5, 10, 0, 0),
+                            fillColor: ColorExtensions.gray,
+                            hintStyle:
+                                const TextStyle(color: ColorExtensions.black),
+                            hintText: 'Confirm Password',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple, width: 2.0)),
+                            errorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(4),
-                              borderSide: const BorderSide(
-                                  color: ColorExtensions.purple, width: 2.0)),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                            borderSide: const BorderSide(color: Colors.red),
+                              borderSide: const BorderSide(color: Colors.red),
+                            ),
                           ),
+                          validator: validateConfirmPass,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          onSaved: (val) {
+                            setState(() {
+                              confirmPass = val;
+                            });
+                          },
                         ),
-                        validator: validateConfirmPass,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        onSaved: (val) {
-                          setState(() {
-                            confirmPass = val;
-                          });
-                        },
-                      ),
-                    ],
-                  )),
-              const SizedBox(
-                height: 30,
-              ),
-              Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // loop throught the users array and check wheher the textfield data is in the users array
-                      // to check whether the user entered something into the input
+                      ],
+                    )),
+                const SizedBox(
+                  height: 20,
+                ),
+                Column(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        // loop throught the users array and check wheher the textfield data is in the users array
+                        // to check whether the user entered something into the input
 
-                      if (_formKey.currentState!.validate()) {
-                        // save the form values int the email an password variables
-                        _formKey.currentState!.save();
+                        if (_formKey.currentState!.validate()) {
+                          // save the form values int the email an password variables
+                          _formKey.currentState!.save();
 
-                        User data = User(
-                          email: email!,
-                          fullName: fullName!,
-                          password: password!,
-                        );
+                          User data = User(
+                            email: email!,
+                            fullName: fullName!,
+                            password: password!,
+                          );
 
-                        // to check if there is data that is recieved from the form an add it into the users array
-                        if (data.email!.isNotEmpty &&
-                            data.fullName!.isNotEmpty &&
-                            data.password!.isNotEmpty) {
-                          users.add(data);
+                          // to check if there is data that is recieved from the form an add it into the users array
+                          if (data.email!.isNotEmpty &&
+                              data.fullName!.isNotEmpty &&
+                              data.password!.isNotEmpty) {
+                            users.add(data);
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      LoginPage(users: users)));
-                        }
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: const Size.fromWidth(284),
-                        backgroundColor: ColorExtensions.purple,
-                        foregroundColor: ColorExtensions.gray),
-                    child: const Text('Sign Up'),
-                  ),
-                  const Padding(padding: EdgeInsets.only(top: 20)),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Have an account? ",
-                        style: TextStyle(
-                            color: ColorExtensions.black,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      TextButton(
-                          onPressed: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage(
-                                          users: users,
-                                        )));
-                          },
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                                color: ColorExtensions.purple,
-                                fontWeight: FontWeight.bold),
-                          ))
-                    ],
-                  )
-                ],
-              )
-            ],
+                                    builder: (context) =>
+                                        LoginPage(users: users)));
+                          }
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          fixedSize: const Size.fromWidth(284),
+                          backgroundColor: ColorExtensions.purple,
+                          foregroundColor: ColorExtensions.gray),
+                      child: const Text('Sign Up'),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 5)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Have an account? ",
+                          style: TextStyle(
+                              color: ColorExtensions.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage(
+                                            users: users,
+                                          )));
+                            },
+                            child: const Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: ColorExtensions.purple,
+                                  fontWeight: FontWeight.bold),
+                            ))
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

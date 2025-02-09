@@ -63,6 +63,17 @@ class UserModel extends ChangeNotifier {
     userData?.favouriteWorkouts?.remove(workoutname);
     notifyListeners();
   }
+
+  void logout() async {
+    userData?.email = "";
+    userData?.password = "";
+    userData?.fullName = "";
+    userData?.bmi = 0;
+    userData?.height = 0;
+    userData?.weight = 0;
+    userData?.favouriteWorkouts = [];
+    notifyListeners();
+  }
 }
 
 List<User> listOfUsers() {

@@ -53,13 +53,20 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 50),
                 SvgPicture.asset("assets/svgs/login.svg"),
                 const SizedBox(height: 50),
-                const Text(
-                  "Login",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Poppins',
-                      fontSize: 24),
-                ),
+                const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 54,
+                      ),
+                      Text(
+                        "Login",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Poppins',
+                            fontSize: 24),
+                      ),
+                    ]),
                 const SizedBox(height: 20),
                 Form(
                     key: _formKey,

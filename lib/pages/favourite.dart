@@ -27,93 +27,97 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 "Favorited Workouts",
                 style: TextStyle(
                     color: ColorExtensions.purple,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     fontSize: 18),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
-                child: userFavouriteList!.isEmpty
-                    ? const Center(
-                        child: Text(
-                          "Your favourite list is empty",
-                          style: TextStyle(
-                              color: ColorExtensions.purple,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    : ListView.builder(
-                        itemCount: userFavouriteList?.length,
-                        itemBuilder: (context, index) {
-                          final workoutName = userFavouriteList![index];
-                          final workout = workoutPlans.firstWhere(
-                              (el) => el.workoutName == workoutName);
-                          return Card(
-                            elevation: 4.0,
-                            color: ColorExtensions.gray,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 15),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 100,
-                                  height: 100,
-                                  child: Image.asset(workout.imageUrl),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      workoutName,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: ColorExtensions.purple),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Container(
-                                      width: 58,
-                                      height: 18,
-                                      decoration: BoxDecoration(
-                                          color: ColorExtensions.purple,
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(4),
-                                      child: Text(
-                                        workout.categoryTag,
+              Consumer<UserModel>(builder: (context, userModel, child) {
+                var userFavouriteList = userModel.getUser?.favouriteWorkouts;
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  child: userFavouriteList!.isEmpty
+                      ? const Center(
+                          child: Text(
+                            "Your favourite list is empty",
+                            style: TextStyle(
+                                color: ColorExtensions.purple,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: userFavouriteList.length,
+                          itemBuilder: (context, index) {
+                            final workoutName = userFavouriteList![index];
+                            final workout = workoutPlans.firstWhere(
+                                (el) => el.workoutName == workoutName);
+                            return Card(
+                              elevation: 4.0,
+                              color: ColorExtensions.gray,
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 15),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 100,
+                                    height: 100,
+                                    child: Image.asset(workout.imageUrl),
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        workoutName,
                                         style: const TextStyle(
-                                            color: ColorExtensions.gray,
-                                            fontSize: 8),
+                                            fontWeight: FontWeight.bold,
+                                            color: ColorExtensions.purple),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                TextButton(
-                                    onPressed: () {
-                                      context
-                                          .read<UserModel>()
-                                          .removeWorkout(workoutName);
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                            content: Text('Workout Removed')),
-                                      );
-                                    },
-                                    child: const Text("Remove")),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-              )
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Container(
+                                        width: 58,
+                                        height: 18,
+                                        decoration: BoxDecoration(
+                                            color: ColorExtensions.purple,
+                                            borderRadius:
+                                                BorderRadius.circular(4)),
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets.all(4),
+                                        child: Text(
+                                          workout.categoryTag,
+                                          style: const TextStyle(
+                                              color: ColorExtensions.gray,
+                                              fontSize: 8),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                      onPressed: () {
+                                        context
+                                            .read<UserModel>()
+                                            .removeWorkout(workoutName);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text('Workout Removed')),
+                                        );
+                                      },
+                                      child: const Text("Remove")),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                );
+              }),
             ],
           ),
         ),

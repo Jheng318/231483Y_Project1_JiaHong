@@ -38,6 +38,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: ColorExtensions.purple,
+        unselectedItemColor: ColorExtensions.gray,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: SvgPicture.asset("assets/svgs/discover_icon.svg"),
@@ -65,9 +68,9 @@ class _HomePageState extends State<HomePage> {
 
   late final List<Widget> _widgetOptions = <Widget>[
     HomeScreen(workouts: workouts),
-    FavouriteScreen(),
-    ProfileScreen(),
-    AboutusPage(),
+    const FavouriteScreen(),
+    const ProfileScreen(),
+    const AboutusPage(),
   ];
 }
 
@@ -79,7 +82,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(
-          height: 30,
+          height: 50,
         ),
         const Text(
           "Fit&Me",

@@ -16,6 +16,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final users = listOfUsers();
+  final formKey = GlobalKey<FormState>();
+
+  String? name, email;
+  double? height, weight, bmi;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,24 +32,173 @@ class _ProfileScreenState extends State<ProfileScreen> {
         title: const Center(
             child: Text(
           "Profile Page",
-          style: TextStyle(fontSize: 18, color: ColorExtensions.purple),
+          style: TextStyle(
+              fontSize: 20,
+              color: ColorExtensions.purple,
+              fontWeight: FontWeight.bold),
         )),
       ),
       body: Center(child: SingleChildScrollView(
         child: Consumer<UserModel>(builder: (context, userModel, child) {
           var user = userModel.getUser;
+          if (user != null && user.height != null && user.weight != null) {
+            bmi = user.weight! / (user.height! * user.height!);
+          } else {
+            bmi = 0;
+          }
           return Column(
             children: [
+              Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        initialValue: user?.fullName ?? "",
+                        decoration: InputDecoration(
+                            labelText: "Full Name",
+                            labelStyle: const TextStyle(fontSize: 20),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            constraints: const BoxConstraints(
+                                maxWidth: 284, maxHeight: 45),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple,
+                                    width: 2.0))),
+                        onSaved: (value) {
+                          if (value != null) {
+                            setState(() {
+                              name = value;
+                            });
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        initialValue: user?.email ?? "",
+                        decoration: InputDecoration(
+                            labelText: "Email Address",
+                            labelStyle: const TextStyle(fontSize: 20),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            constraints: const BoxConstraints(
+                                maxWidth: 284, maxHeight: 45),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple,
+                                    width: 2.0))),
+                        onSaved: (value) {
+                          if (value != null) {
+                            setState(() {
+                              email = value;
+                            });
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        initialValue: user?.weight?.toString() ?? "0.00",
+                        decoration: InputDecoration(
+                            labelText: "weight",
+                            labelStyle: const TextStyle(fontSize: 20),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            constraints: const BoxConstraints(
+                                maxWidth: 284, maxHeight: 45),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple,
+                                    width: 2.0))),
+                        onSaved: (value) {
+                          if (value != null) {
+                            setState(() {
+                              weight = double.parse(value);
+                            });
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      TextFormField(
+                        initialValue: user?.height?.toString() ?? "0.00",
+                        decoration: InputDecoration(
+                            labelText: "height",
+                            labelStyle: const TextStyle(fontSize: 20),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10),
+                            constraints: const BoxConstraints(
+                                maxWidth: 284, maxHeight: 45),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: const BorderSide(
+                                    color: ColorExtensions.purple,
+                                    width: 2.0))),
+                        onSaved: (value) {
+                          if (value != null) {
+                            setState(() {
+                              height = double.parse(value);
+                            });
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  )),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text(
-                    "Username: ",
-                    style: TextStyle(color: ColorExtensions.purple),
-                  ),
-                  Text(user!.fullName!,
-                      style: const TextStyle(color: ColorExtensions.purple))
+                  const Text("BMI:",
+                      style: TextStyle(
+                          color: ColorExtensions.purple,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
+                  Text(
+                      ((bmi?.isNaN == true ? 0.0 : bmi) ?? 0.0)
+                          .toStringAsFixed(1),
+                      style: const TextStyle(
+                          color: ColorExtensions.purple,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
                 ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      userModel.updateName(name ?? "");
+                      userModel.updateEmail(email ?? "");
+                      userModel.updateWeight(weight ?? 0.0);
+                      userModel.updateHeight(height ?? 0.0);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorExtensions.purple,
+                    foregroundColor: ColorExtensions.gray,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust the radius as needed
+                    ),
+                  ),
+                  child: const Text("Save info"),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,

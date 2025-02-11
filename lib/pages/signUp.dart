@@ -30,7 +30,7 @@ class _SignupPageState extends State<SignupPage> {
     );
     final isPasswordValid = passwordRegex.hasMatch(password ?? '');
     if (!isPasswordValid) {
-      return '8 characters, 1 uppercase, 1 lowercase letter, and 1 digit.';
+      return '8 characters with uppercase, numbers and symbols.';
     }
 
     return null;
@@ -150,7 +150,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TextFormField(
-                          obscureText: false,
+                          obscureText: true,
                           controller: _passwordController,
                           decoration: InputDecoration(
                             constraints: const BoxConstraints(
@@ -182,7 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         const Padding(padding: EdgeInsets.only(top: 20)),
                         TextFormField(
-                          obscureText: false,
+                          obscureText: true,
                           decoration: InputDecoration(
                             constraints: const BoxConstraints(
                               maxWidth: 284,
@@ -228,10 +228,10 @@ class _SignupPageState extends State<SignupPage> {
                           _formKey.currentState!.save();
 
                           User data = User(
-                            email: email!,
-                            fullName: fullName!,
-                            password: password!,
-                          );
+                              email: email!,
+                              fullName: fullName!,
+                              password: password!,
+                              favouriteWorkouts: []);
 
                           // to check if there is data that is recieved from the form an add it into the users array
                           if (data.email!.isNotEmpty &&

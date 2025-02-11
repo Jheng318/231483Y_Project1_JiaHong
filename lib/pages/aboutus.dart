@@ -124,7 +124,7 @@ class _AboutusPageState extends State<AboutusPage> {
               height: 40,
             ),
             const Text(
-              "Contact Infromation",
+              "Contact Information",
               style: TextStyle(
                 color: ColorExtensions.purple,
                 fontSize: 18,
@@ -298,7 +298,7 @@ class _AboutusPageState extends State<AboutusPage> {
                             style: TextStyle(
                                 color: ColorExtensions.purple, fontSize: 14.0),
                           ),
-                        ))
+                        )),
                   ])
                 ],
               ),

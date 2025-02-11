@@ -52,11 +52,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   key: formKey,
                   child: Column(
                     children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 54,
+                          ),
+                          Text("Full Name:",
+                              style: TextStyle(
+                                  color: ColorExtensions.purple,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       TextFormField(
                         initialValue: user?.fullName ?? "",
                         decoration: InputDecoration(
-                            labelText: "Full Name",
-                            labelStyle: const TextStyle(fontSize: 20),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
                             constraints: const BoxConstraints(
@@ -75,13 +89,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 54,
+                          ),
+                          Text("Email Address:",
+                              style: TextStyle(
+                                  color: ColorExtensions.purple,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       TextFormField(
                         initialValue: user?.email ?? "",
                         decoration: InputDecoration(
-                            labelText: "Email Address",
-                            labelStyle: const TextStyle(fontSize: 20),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
                             constraints: const BoxConstraints(
@@ -100,13 +128,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 54,
+                          ),
+                          Text("Weight:",
+                              style: TextStyle(
+                                  color: ColorExtensions.purple,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       TextFormField(
                         initialValue: user?.weight?.toString() ?? "0.00",
                         decoration: InputDecoration(
-                            labelText: "weight",
-                            labelStyle: const TextStyle(fontSize: 20),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
                             constraints: const BoxConstraints(
@@ -125,13 +167,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
+                      ),
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 54,
+                          ),
+                          Text("Height:",
+                              style: TextStyle(
+                                  color: ColorExtensions.purple,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       TextFormField(
                         initialValue: user?.height?.toString() ?? "0.00",
                         decoration: InputDecoration(
-                            labelText: "height",
-                            labelStyle: const TextStyle(fontSize: 20),
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
                             constraints: const BoxConstraints(
@@ -150,7 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                     ],
                   )),
@@ -184,6 +240,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       userModel.updateEmail(email ?? "");
                       userModel.updateWeight(weight ?? 0.0);
                       userModel.updateHeight(height ?? 0.0);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Information Upadated')),
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -194,7 +253,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           10.0), // Adjust the radius as needed
                     ),
                   ),
-                  child: const Text("Save info"),
+                  child: const Text("Save details"),
                 ),
               ),
               const SizedBox(
@@ -223,6 +282,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: const Text("Logout"),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              )
             ],
           );
         }),
